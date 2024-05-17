@@ -1,5 +1,4 @@
-ansible_atomic_red_team
-=========
+# atomic-red-team
 
 A role to execute atomic red team tests.
 
@@ -50,21 +49,18 @@ playbook, set `disable_fetch_art_index: true`. This will cause
 `tasks/main.yml` to fall back to `vars/art-tids.yml` which can be manually
 updates with `vars/update-art-tids.sh`
 
-
-Role Variables
---------------
+## Role Variables
 
 in `defaults/main.yml`:
-- `banned_tids_linux`: annotated list of TIDs to *NOT* run
+
+- `banned_tids_linux`: annotated list of TIDs to _NOT_ run
 - `art_tids_linux`: list of the linux TIDs available in Atomic Red Team
 - `art_tids_mac`: list of the mac TIDs available in Atomic Red Team
 - `art_tids_windows`: list of the windows TIDs available in Atomic Red Team
-- `art_repository_owner: redcanaryco` - override with the github repo owner for the atomic_red_team repo to use.
+- `art_repository_owner: redcanaryco` - override with the github repo owner for the atomic-red-team repo to use.
 - `art_branch: master` - override with the branch to use
 
-
-Example Playbook
-----------------
+## Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
@@ -74,9 +70,8 @@ Including an example of how to use your role (for instance, with variables passe
   gather_facts: True
   become: True
   tasks:
-
     - include_role:
-        name: ansible_atomic_red_team
+        name: atomic_red_team
         # you cannot use become directly on include_role, but can control elevation using apply
         apply:
           become: True
@@ -93,7 +88,7 @@ Including an example of how to use your role (for instance, with variables passe
         # TID.SUBTID MUST be specified and match GUIDs, as required by Invoke-AtomicTest
 
     - include_role:
-        name: ansible_atomic_red_team
+        name: atomic_red_team
         apply:
           become: False
       when: ansible_system == 'Win32NT'
@@ -107,5 +102,5 @@ Including an example of how to use your role (for instance, with variables passe
 
     # this runs all available tests against all target systems
     # - include_role:
-    #     name: ansible_atomic_red_team
+    #     name: atomic_red_team
 ```
