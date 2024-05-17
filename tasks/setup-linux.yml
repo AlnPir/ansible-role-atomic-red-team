@@ -6,7 +6,6 @@
         cmd: pwsh -c '$true'
       changed_when: false
   rescue:
-
     # ------- Ubuntu
 
     - name: Ensure powershell is installed (prereq)
@@ -36,7 +35,7 @@
       ansible.builtin.get_url:
         url: https://packages.microsoft.com/config/rhel/8/prod.repo
         dest: /etc/yum.repos.d/microsoft.repo
-        mode: '0644'
+        mode: "0644"
         owner: root
       when: ansible_facts['distribution'] == 'Amazon'
 
@@ -44,7 +43,7 @@
       ansible.builtin.get_url:
         url: https://packages.microsoft.com/config/rhel/{{ ansible_distribution_major_version }}/prod.repo
         dest: /etc/yum.repos.d/microsoft.repo
-        mode: '0644'
+        mode: "0644"
         owner: root
       when: ansible_facts['distribution'] == 'CentOS'
 
@@ -81,10 +80,10 @@
   ansible.builtin.lineinfile:
     path: "{{ pwshprofile.stdout }}"
     state: present
-    regex: '.*Inovke-AtomicRedTeam.*'
+    regex: ".*Inovke-AtomicRedTeam.*"
     line: |-
       Import-Module "/root/AtomicRedTeam/invoke-atomicredteam/Invoke-AtomicRedTeam.psd1" -Force
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
     create: yes
